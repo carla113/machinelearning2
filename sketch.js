@@ -80,6 +80,18 @@ function gotResults(error, results) {
     return;
   }
   // Storing the label and classifying again!
-  label = results[0].label;
+  let newlabel = results[0].label;
+  if (newlabel != label) { 
+    audio.pause();
+    audio1.pause();
+    if (newlabel== "Ok") {
+      audio.play();   
+    } else if (newlabel=="No elmetto") {
+      audio1.play();
+    } else if (newlabel == "No mascherina") { 
+      audio1.play();
+    } 
+    label=newlabel
+  }
   classifyVideo();
 }
