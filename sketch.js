@@ -1,11 +1,12 @@
 let video;
 let label = "Attendere";
 let classifier;
-let modelURL1 = 'https://teachablemachine.withgoogle.com/models/MAObQ_P--/';
+let modelURL1 = 'https://teachablemachine.withgoogle.com/models/lV2EoKSUx/';
 let Label="indossare mascherina";
 let img;
 let audio = new Audio('mascherina rilevata.mp3');
 let audio1= new Audio('Indossare la mascherina.mp3');
+
 
 // STEP 1: Load the model!
 function preload() {
@@ -13,12 +14,12 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(500, 520);
+  createCanvas(1500, 1500);
   // Create the video
   video = createCapture(VIDEO);
   video.hide();
   
-  //Import Image (per importare un'immagine, eseguire l'istruzione a riga 21; img è il nuovo nome dell'immagine da inserire come primo elemento della funzione image: riga 49)
+  //Import Image
   
   ima=loadImage('aa.jpg');
   obbligo=loadImage('cc.jpg');
@@ -41,28 +42,26 @@ function draw() {
   image(video, 0, 0); 
 
   // Pick an emoji, the "default" is train
-  let emoji = "VERIFICA MASCHERINA IN CORSO...";
-  let emojiColor = 'rgb(0,255,0)';
+  let emoji = "VERIFICA DEI D.P.I. IN CORSO...";
+  let emojiColor = 'rgb(0,0,0)';
 
-
-  if (label== "Mascherina_ok") {
+  if (label== "Ok") {
     emoji = "Accesso consentito";
-    image(ima,0, 20);
-    audio.play();
-    
+    emojiColor='rgb(0,255,0)';
+    image(ima,0, 20);  
   }
-  if (label=="Mascherina_SINO") {
+  if (label=="No elmetto") {
     emoji="Accesso negato";
     emojiColor = 'rgb(255,0,0)';
     image(sino,10, 20);
-    audio1.play();
+    
     
   }  
-  else if (label == "MascherinaNO") { 
+  else if (label == "No mascherina") { 
     emoji="Accesso negato"
     emojiColor = 'rgb(255,0,0)';
     image(obbligo, 10, 20);
-    audio1.play();
+    
   } 
 
   // Drawing the emoji
@@ -70,7 +69,7 @@ function draw() {
   textSize(25);
   textStyle(BOLDITALIC);
   fill(emojiColor);
-  text(emoji, width -250 , height - 100 );
+  text(emoji, width -1200 , height - 1000 );
 }
 // STEP 3: Get the classification!
 function gotResults(error, results) {
